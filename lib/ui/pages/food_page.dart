@@ -8,8 +8,12 @@ class FoodPage extends StatefulWidget {
 }
 
 class _FoodPageState extends State<FoodPage> {
+  int selectedIndex = 0;
+
   @override
   Widget build(BuildContext context) {
+    double listItemWidth =
+        MediaQuery.of(context).size.width - 2 * defaultMargin;
     return ListView(
       children: [
         Column(
@@ -78,6 +82,57 @@ class _FoodPageState extends State<FoodPage> {
               ),
             ),
             //// LIST OF FOOD (TABS)
+            Container(
+              width: double.infinity,
+              color: Colors.white,
+              child: Column(
+                children: [
+                  CustomeTabBar(
+                    selectedIndex: selectedIndex,
+                    titles: ["New Taste", "Popular", "Recommended"],
+                    onTap: (index) {
+                      setState(() {
+                        selectedIndex = index;
+                      });
+                    },
+                  ),
+                  const SizedBox(
+                    height: 16,
+                  ),
+                  Builder(
+                    builder: (_) {
+                      List<Food> foods = (selectedIndex == 0)
+                          ? mockFoods
+                          : (selectedIndex == 1)
+                              ? []
+                              : [];
+
+                      return Column(
+                        children: foods
+                            .map(
+                              (e) => Padding(
+                                padding: const EdgeInsets.fromLTRB(
+                                  defaultMargin,
+                                  0,
+                                  defaultMargin,
+                                  16,
+                                ),
+                                child: FoodListItem(
+                                  food: e,
+                                  itemWidth: listItemWidth,
+                                ),
+                              ),
+                            )
+                            .toList(),
+                      );
+                    },
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(
+              height: 80,
+            ),
           ],
         )
       ],
