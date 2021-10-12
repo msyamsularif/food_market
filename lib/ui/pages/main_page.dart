@@ -10,7 +10,7 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   int selectedPage = 0;
   PageController pageController = PageController(initialPage: 0);
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,7 +37,13 @@ class _MainPageState extends State<MainPage> {
                   child: FoodPage(),
                 ),
                 Center(
-                  child: Text("Order"),
+                  child: IllustrationPage(
+                    title: 'Ouch! Hungry',
+                    subTitle: 'Seems you like have not\nordered any food yet',
+                    picturePath: 'assets/love_burger.png',
+                    buttonTitle1: 'Find Foods',
+                    buttonTap1: () {},
+                  ),
                 ),
                 Center(
                   child: Text("Profile"),
