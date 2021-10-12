@@ -78,8 +78,11 @@ class IllustrationPage extends StatelessWidget {
                 ),
                 onPressed: () {},
                 child: Text(
-                  buttonTitle1,
-                  style: blackFontStyle3.copyWith(fontWeight: FontWeight.w500),
+                  buttonTitle2 ?? "title",
+                  style: blackFontStyle3.copyWith(
+                    fontWeight: FontWeight.w500,
+                    color: Colors.white,
+                  ),
                 ),
               ),
             )
