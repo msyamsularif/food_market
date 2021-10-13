@@ -87,7 +87,7 @@ class _FoodPageState extends State<FoodPage> {
               color: Colors.white,
               child: Column(
                 children: [
-                  CustomeTabBar(
+                  CustomTabBar(
                     selectedIndex: selectedIndex,
                     titles: ["New Taste", "Popular", "Recommended"],
                     onTap: (index) {

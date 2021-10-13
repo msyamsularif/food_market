@@ -65,7 +65,7 @@ class _OrderHistoryPageState extends State<OrderHistoryPage> {
                 color: Colors.white,
                 child: Column(
                   children: [
-                    CustomeTabBar(
+                    CustomTabBar(
                       selectedIndex: selectedIndex,
                       titles: ['In Progress', 'Past Orders'],
                       onTap: (index) {

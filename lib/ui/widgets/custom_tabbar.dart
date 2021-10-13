@@ -1,7 +1,7 @@
 part of 'widgets.dart';
 
-class CustomeTabBar extends StatelessWidget {
-  CustomeTabBar({
+class CustomTabBar extends StatelessWidget {
+  CustomTabBar({
     Key? key,
     required this.selectedIndex,
     required this.titles,
