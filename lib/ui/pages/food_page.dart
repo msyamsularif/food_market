@@ -50,7 +50,9 @@ class _FoodPageState extends State<FoodPage> {
                       borderRadius: BorderRadius.circular(8),
                       image: DecorationImage(
                         image: NetworkImage(
-                          'http://pm1.narvii.com/7107/29a63ea9253e8a25304ff1707830277267f79fcer1-600-600v2_uhq.jpg',
+                          (context.read<UserCubit>().state as UserLoaded)
+                              .user
+                              .picturePath,
                         ),
                         fit: BoxFit.cover,
                       ),
@@ -68,14 +70,32 @@ class _FoodPageState extends State<FoodPage> {
                 children: [
                   Row(
                     children: mockFoods
-                        .map((e) => Padding(
-                              padding: EdgeInsets.only(
-                                left:
-                                    (e == mockFoods.first) ? defaultMargin : 0,
-                                right: defaultMargin,
-                              ),
+                        .map(
+                          (e) => Padding(
+                            padding: EdgeInsets.only(
+                              left: (e == mockFoods.first) ? defaultMargin : 0,
+                              right: defaultMargin,
+                            ),
+                            child: GestureDetector(
+                              onTap: () {
+                                Get.to(
+                                  () => FoodDetailsPage(
+                                    onBackButtonPressed: () {
+                                      Get.back();
+                                    },
+                                    transaction: Transaction(
+                                      food: e,
+                                      user: (context.read<UserCubit>().state
+                                              as UserLoaded)
+                                          .user,
+                                    ),
+                                  ),
+                                );
+                              },
                               child: FoodCard(food: e),
-                            ))
+                            ),
+                          ),
+                        )
                         .toList(),
                   )
                 ],

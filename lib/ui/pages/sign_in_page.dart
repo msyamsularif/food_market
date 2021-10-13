@@ -77,10 +77,53 @@ class _SignInPageState extends State<SignInPage> {
                 ? loadingIndicator
                 : ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                        primary: mainColor,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8))),
-                    onPressed: () {},
+                      primary: mainColor,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                    ),
+                    onPressed: () async {
+                      setState(() {
+                        isLoading = true;
+                      });
+                      await context.read<UserCubit>().signIn(
+                          emailController.text, passwordController.text);
+
+                      UserState state = context.read<UserCubit>().state;
+
+                      if (state is UserLoaded) {
+                        context.read<FoodCubit>().getFoods();
+                        context.read<TransactionCubit>().getTransaction();
+
+                        Get.to(() => MainPage());
+                      } else {
+                        Get.showSnackbar(
+                          GetBar(
+                            backgroundColor: "D9435E".toColor(),
+                            icon: Icon(
+                              MdiIcons.closeCircleOutline,
+                              color: Colors.white,
+                            ),
+                            titleText: Text(
+                              "Sign In Failed",
+                              style: GoogleFonts.poppins(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            messageText: Text(
+                              (state as UserLoadingFailed).message,
+                              style: GoogleFonts.poppins(
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        );
+                        setState(() {
+                          isLoading = false;
+                        });
+                      }
+                    },
                     child: Text(
                       "Sign In",
                       style: GoogleFonts.poppins(

@@ -34,7 +34,7 @@ class _FoodDetailsPageState extends State<FoodDetailsPage> {
               width: double.infinity,
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: NetworkImage(widget.transaction.food.picturePath),
+                  image: NetworkImage(widget.transaction.food!.picturePath),
                   fit: BoxFit.cover,
                 ),
               ),
@@ -51,7 +51,7 @@ class _FoodDetailsPageState extends State<FoodDetailsPage> {
                     child: Align(
                       alignment: Alignment.centerLeft,
                       child: GestureDetector(
-                        onTap: () => widget.onBackButtonPressed,
+                        onTap: () => widget.onBackButtonPressed(),
                         child: Container(
                           padding: EdgeInsets.all(3),
                           width: 30,
@@ -90,14 +90,15 @@ class _FoodDetailsPageState extends State<FoodDetailsPage> {
                                   width:
                                       MediaQuery.of(context).size.width - 134,
                                   child: Text(
-                                    widget.transaction.food.name,
+                                    widget.transaction.food!.name,
                                     style: blackFontStyle1,
                                   ),
                                 ),
                                 const SizedBox(
                                   height: 6,
                                 ),
-                                RatingStars(rate: widget.transaction.food.rate),
+                                RatingStars(
+                                    rate: widget.transaction.food!.rate),
                               ],
                             ),
                             Row(
@@ -153,7 +154,7 @@ class _FoodDetailsPageState extends State<FoodDetailsPage> {
                         Container(
                           margin: EdgeInsets.fromLTRB(0, 14, 0, 16),
                           child: Text(
-                            widget.transaction.food.description,
+                            widget.transaction.food!.description,
                             style: greyFontStyle,
                           ),
                         ),
@@ -164,7 +165,7 @@ class _FoodDetailsPageState extends State<FoodDetailsPage> {
                         Container(
                           margin: EdgeInsets.fromLTRB(0, 4, 0, 41),
                           child: Text(
-                            widget.transaction.food.ingredients,
+                            widget.transaction.food!.ingredients,
                             style: greyFontStyle,
                           ),
                         ),
@@ -184,7 +185,7 @@ class _FoodDetailsPageState extends State<FoodDetailsPage> {
                                           symbol: 'IDR ',
                                           decimalDigits: 0)
                                       .format(
-                                    quantity * widget.transaction.food.price,
+                                    quantity * widget.transaction.food!.price,
                                   ),
                                   style: blackFontStyle2.copyWith(fontSize: 18),
                                 ),

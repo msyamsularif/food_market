@@ -45,7 +45,8 @@ class PaymentPage extends StatelessWidget {
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(8),
                             image: DecorationImage(
-                              image: NetworkImage(transaction.food.picturePath),
+                              image:
+                                  NetworkImage(transaction.food!.picturePath),
                               fit: BoxFit.cover,
                             ),
                           ),
@@ -56,7 +57,7 @@ class PaymentPage extends StatelessWidget {
                             SizedBox(
                               width: MediaQuery.of(context).size.width - 198,
                               child: Text(
-                                transaction.food.name,
+                                transaction.food!.name,
                                 style: blackFontStyle2,
                                 maxLines: 1,
                                 overflow: TextOverflow.clip,
@@ -67,7 +68,7 @@ class PaymentPage extends StatelessWidget {
                                       locale: 'id-ID',
                                       symbol: 'IDR ',
                                       decimalDigits: 0)
-                                  .format(transaction.food.price),
+                                  .format(transaction.food!.price),
                               style: greyFontStyle.copyWith(fontSize: 13),
                             ),
                           ],
@@ -94,7 +95,7 @@ class PaymentPage extends StatelessWidget {
                     SizedBox(
                       width:
                           MediaQuery.of(context).size.width / 2 - defaultMargin,
-                      child: Text(transaction.food.name, style: greyFontStyle),
+                      child: Text(transaction.food!.name, style: greyFontStyle),
                     ),
                     SizedBox(
                       width:
@@ -105,7 +106,7 @@ class PaymentPage extends StatelessWidget {
                                 symbol: 'IDR ',
                                 decimalDigits: 0)
                             .format(
-                          transaction.quantity * transaction.food.price,
+                          transaction.quantity! * transaction.food!.price,
                         ),
                         style: blackFontStyle3,
                         textAlign: TextAlign.right,
@@ -161,7 +162,7 @@ class PaymentPage extends StatelessWidget {
                                 symbol: 'IDR ',
                                 decimalDigits: 0)
                             .format(
-                          transaction.quantity * transaction.food.price * 0.1,
+                          transaction.quantity! * transaction.food!.price * 0.1,
                         ),
                         style: blackFontStyle3,
                         textAlign: TextAlign.right,
@@ -237,7 +238,7 @@ class PaymentPage extends StatelessWidget {
                           2 * defaultMargin -
                           80,
                       child: Text(
-                        transaction.user.name,
+                        transaction.user!.name,
                         style: blackFontStyle3,
                         textAlign: TextAlign.right,
                       ),
@@ -256,7 +257,7 @@ class PaymentPage extends StatelessWidget {
                       style: greyFontStyle,
                     ),
                     Text(
-                      transaction.user.phoneNumber,
+                      transaction.user!.phoneNumber,
                       style: blackFontStyle3,
                       textAlign: TextAlign.right,
                     )
@@ -280,7 +281,7 @@ class PaymentPage extends StatelessWidget {
                             2 * defaultMargin -
                             80,
                         child: Text(
-                          transaction.user.address,
+                          transaction.user!.address,
                           style: blackFontStyle3,
                           textAlign: TextAlign.right,
                         ))
@@ -298,7 +299,7 @@ class PaymentPage extends StatelessWidget {
                       style: greyFontStyle,
                     ),
                     Text(
-                      transaction.user.houseNumber,
+                      transaction.user!.houseNumber,
                       style: blackFontStyle3,
                       textAlign: TextAlign.right,
                     )
@@ -316,7 +317,7 @@ class PaymentPage extends StatelessWidget {
                       style: greyFontStyle,
                     ),
                     Text(
-                      transaction.user.city,
+                      transaction.user!.city,
                       style: blackFontStyle3,
                       textAlign: TextAlign.right,
                     )

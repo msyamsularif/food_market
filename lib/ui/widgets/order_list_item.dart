@@ -21,7 +21,7 @@ class OrderListItem extends StatelessWidget {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),
             image: DecorationImage(
-              image: NetworkImage(transaction.food.picturePath),
+              image: NetworkImage(transaction.food!.picturePath),
               fit: BoxFit.cover,
             ),
           ),
@@ -32,7 +32,7 @@ class OrderListItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                transaction.food.name,
+                transaction.food!.name,
                 style: blackFontStyle2,
                 maxLines: 1,
                 overflow: TextOverflow.clip,
@@ -55,7 +55,7 @@ class OrderListItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               Text(
-                convertDateTime(transaction.dateTime),
+                convertDateTime(transaction.dateTime!),
                 style: greyFontStyle.copyWith(fontSize: 12),
               ),
               (transaction.status == TransactionStatus.cancelled)
