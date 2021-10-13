@@ -74,10 +74,7 @@ class _SignInPageState extends State<SignInPage> {
             padding: EdgeInsets.symmetric(horizontal: 24),
             height: 45,
             child: isLoading
-                ? SpinKitFadingCircle(
-                    size: 45,
-                    color: mainColor,
-                  )
+                ? loadingIndicator
                 : ElevatedButton(
                     style: ElevatedButton.styleFrom(
                         primary: mainColor,
