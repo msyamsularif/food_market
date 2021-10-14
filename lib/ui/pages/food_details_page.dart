@@ -202,7 +202,17 @@ class _FoodDetailsPageState extends State<FoodDetailsPage> {
                                     borderRadius: BorderRadius.circular(8),
                                   ),
                                 ),
-                                onPressed: () {},
+                                onPressed: () {
+                                  Get.to(
+                                    () => PaymentPage(
+                                      transaction: widget.transaction.copyWith(
+                                        quantity: quantity,
+                                        total: quantity *
+                                            widget.transaction.food!.price,
+                                      ),
+                                    ),
+                                  );
+                                },
                                 child: Text(
                                   "Order Now",
                                   style: blackFontStyle3.copyWith(

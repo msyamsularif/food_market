@@ -43,12 +43,12 @@ class GenerlPages extends StatelessWidget {
                         children: [
                           onBackButtonPressed != null
                               ? GestureDetector(
-                                onTap: () {
-                                  if(onBackButtonPressed != null){
-                                    onBackButtonPressed!();
-                                  }
-                                },
-                                child: Container(
+                                  onTap: () {
+                                    if (onBackButtonPressed != null) {
+                                      onBackButtonPressed!();
+                                    }
+                                  },
+                                  child: Container(
                                     width: 24,
                                     height: 24,
                                     margin: EdgeInsets.only(right: 26),
@@ -59,7 +59,7 @@ class GenerlPages extends StatelessWidget {
                                       ),
                                     ),
                                   ),
-                              )
+                                )
                               : SizedBox(),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
