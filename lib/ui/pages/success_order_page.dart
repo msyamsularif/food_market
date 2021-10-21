@@ -16,7 +16,13 @@ class SuccessOrderPage extends StatelessWidget {
           Get.offAll(() => MainPage());
         },
         buttonTitle2: 'View My Order',
-        buttonTap2: () {},
+        buttonTap2: () {
+          Get.offAll(
+            () => MainPage(
+              initialPage: 1,
+            ),
+          );
+        },
       ),
     );
   }

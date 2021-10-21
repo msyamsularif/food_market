@@ -30,7 +30,7 @@ class TransactionCubit extends Cubit<TransactionState> {
               (state as TransactionLoaded).transaction + [result.value],
         ),
       );
-      print("DISINI - $result");
+      print("DISINI - ${result.value}");
       return true;
     } else {
       return false;
