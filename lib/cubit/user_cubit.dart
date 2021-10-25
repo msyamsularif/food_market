@@ -12,7 +12,7 @@ class UserCubit extends Cubit<UserState> {
     ApiReturnValue<User>? result = await UserService.signIn(email, password);
 
     if (result != null) {
-      emit(UserLoaded(user: result.value));
+      emit(UserLoaded(user: result.value!));
     } else {
       emit(UserLoadingFailed(message: result!.message!));
     }

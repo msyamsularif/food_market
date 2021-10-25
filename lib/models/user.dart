@@ -9,6 +9,7 @@ class User extends Equatable {
   final String phoneNumber;
   final String city;
   final String picturePath;
+  static String? token;
 
   User({
     required this.id,

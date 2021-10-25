@@ -13,7 +13,7 @@ class TransactionCubit extends Cubit<TransactionState> {
         await TransactionServices.getTransaction();
 
     if (result != null) {
-      emit(TransactionLoaded(transaction: result.value));
+      emit(TransactionLoaded(transaction: result.value!));
     } else {
       emit(TransactionLoadingFailed(message: result!.message!));
     }
@@ -27,7 +27,7 @@ class TransactionCubit extends Cubit<TransactionState> {
       emit(
         TransactionLoaded(
           transaction:
-              (state as TransactionLoaded).transaction + [result.value],
+              (state as TransactionLoaded).transaction + [result.value!],
         ),
       );
       print("DISINI - ${result.value}");
