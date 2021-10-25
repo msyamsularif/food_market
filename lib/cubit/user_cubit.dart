@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:food_market/models/models.dart';
@@ -15,6 +17,30 @@ class UserCubit extends Cubit<UserState> {
       emit(UserLoaded(user: result.value!));
     } else {
       emit(UserLoadingFailed(message: result!.message!));
+    }
+  }
+
+  Future<void> signUp(User user, String password, {File? pictureFile}) async {
+    ApiReturnValue<User> result =
+        await UserService.signUp(user, password, pictureFile: pictureFile);
+
+    if (result.value != null) {
+      emit(UserLoaded(user: result.value!));
+    } else {
+      emit(UserLoadingFailed(message: result.message!));
+    }
+  }
+
+  Future<void> uploadProfilePicture(File? pictureFile) async {
+    ApiReturnValue<String> result =
+        await UserService.uploadProfilePicture(pictureFile!);
+
+    if (result.value != null) {
+      emit(UserLoaded(
+          user: (state as UserLoaded).user.copyWith(
+              picturePath:
+                  "http://foodmarket-backend.buildwithangga.id/storage/" +
+                      result.value!)));
     }
   }
 }
