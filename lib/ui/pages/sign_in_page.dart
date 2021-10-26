@@ -61,6 +61,7 @@ class _SignInPageState extends State<SignInPage> {
             ),
             child: TextField(
               controller: passwordController,
+              obscureText: true,
               decoration: InputDecoration(
                 border: InputBorder.none,
                 hintStyle: greyFontStyle,

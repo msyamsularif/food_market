@@ -13,10 +13,10 @@ class UserCubit extends Cubit<UserState> {
   Future<void> signIn(String email, String password) async {
     ApiReturnValue<User>? result = await UserService.signIn(email, password);
 
-    if (result != null) {
+    if (result!.value != null) {
       emit(UserLoaded(user: result.value!));
     } else {
-      emit(UserLoadingFailed(message: result!.message!));
+      emit(UserLoadingFailed(message: result.message!));
     }
   }
 
