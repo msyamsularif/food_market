@@ -8,6 +8,9 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
+  User? user;
+  File? pictureFile;
+
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController nameController = TextEditingController();
@@ -24,26 +27,49 @@ class _SignUpPageState extends State<SignUpPage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Center(
-            child: Container(
-              width: 110,
-              height: 110,
-              margin: EdgeInsets.only(top: 26),
-              padding: EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage('assets/photo_border.png'),
-                ),
-              ),
+            child: GestureDetector(
+              onTap: () async {
+                final pickedFile =
+                    await ImagePicker().pickImage(source: ImageSource.gallery);
+
+                if (pickedFile != null) {
+                  pictureFile = File(pickedFile.path);
+                  setState(() {});
+                }
+              },
               child: Container(
+                width: 110,
+                height: 110,
+                margin: EdgeInsets.only(top: 26),
+                padding: EdgeInsets.all(10),
                 decoration: BoxDecoration(
-                  shape: BoxShape.circle,
                   image: DecorationImage(
-                    image: NetworkImage(
-                      'http://pm1.narvii.com/7107/29a63ea9253e8a25304ff1707830277267f79fcer1-600-600v2_uhq.jpg',
-                    ),
-                    fit: BoxFit.cover,
+                    image: AssetImage('assets/photo_border.png'),
                   ),
                 ),
+                child: (pictureFile != null)
+                    ? Container(
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          image: DecorationImage(
+                            image: FileImage(
+                              pictureFile!,
+                            ),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      )
+                    : Container(
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          image: DecorationImage(
+                            image: AssetImage(
+                              'assets/photo.png',
+                            ),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
               ),
             ),
           ),
@@ -112,6 +138,7 @@ class _SignUpPageState extends State<SignUpPage> {
             ),
             child: TextField(
               controller: passwordController,
+              obscureText: true,
               decoration: InputDecoration(
                 border: InputBorder.none,
                 hintStyle: greyFontStyle,
@@ -130,7 +157,14 @@ class _SignUpPageState extends State<SignUpPage> {
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8))),
               onPressed: () {
-                Get.to(() => AddressPage());
+                Get.to(
+                  () => AddressPage(
+                    user: User(
+                        name: nameController.text, email: emailController.text),
+                    password: passwordController.text,
+                    pictureFile: pictureFile,
+                  ),
+                );
               },
               child: Text(
                 "Continue",

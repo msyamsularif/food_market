@@ -20,14 +20,14 @@ class UserService {
       Uri.parse(url),
       headers: {"Content-Type": "application/json"},
       body: jsonEncode(<String, String>{
-        'name': user.name,
-        'email': user.email,
+        'name': user.name!,
+        'email': user.email!,
         'password': password,
         'password_confirmation': password,
-        'address': user.address,
-        'city': user.city,
-        'houseNumber': user.houseNumber,
-        'phoneNumber': user.phoneNumber,
+        'address': user.address!,
+        'city': user.city!,
+        'houseNumber': user.houseNumber!,
+        'phoneNumber': user.phoneNumber!,
       }),
     );
 
@@ -37,7 +37,7 @@ class UserService {
     var data = jsonDecode(response.body);
 
     User.token = data['data']['access_token'];
-    User value = data['data']['user'];
+    User value = User.fromJson(data['data']['user']);
 
     /// Todo: upload profile picture
     if (pictureFile != null) {

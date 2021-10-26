@@ -1,25 +1,25 @@
 part of 'models.dart';
 
 class User extends Equatable {
-  final int id;
-  final String name;
-  final String email;
-  final String address;
-  final String houseNumber;
-  final String phoneNumber;
-  final String city;
-  final String picturePath;
+  final int? id;
+  final String? name;
+  final String? email;
+  final String? address;
+  final String? houseNumber;
+  final String? phoneNumber;
+  final String? city;
+  final String? picturePath;
   static String? token;
 
   User({
-    required this.id,
-    required this.name,
-    required this.email,
-    required this.address,
-    required this.houseNumber,
-    required this.phoneNumber,
-    required this.city,
-    required this.picturePath,
+    this.id,
+    this.name,
+    this.email,
+    this.address,
+    this.houseNumber,
+    this.phoneNumber,
+    this.city,
+    this.picturePath,
   });
 
   @override
@@ -55,6 +55,17 @@ class User extends Equatable {
       picturePath: picturePath ?? this.picturePath,
     );
   }
+
+  factory User.fromJson(Map<String, dynamic> data) => User(
+        id: data['id'],
+        name: data['name'],
+        email: data['email'],
+        address: data['address'],
+        houseNumber: data['houseNumber'],
+        phoneNumber: data['phoneNumber'],
+        city: data['city'],
+        picturePath: data['profile_photo_url'],
+      );
 }
 
 User mockUser = User(

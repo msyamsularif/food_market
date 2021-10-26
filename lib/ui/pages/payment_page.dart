@@ -256,7 +256,7 @@ class _PaymentPageState extends State<PaymentPage> {
                           2 * defaultMargin -
                           80,
                       child: Text(
-                        widget.transaction.user!.name,
+                        widget.transaction.user!.name!,
                         style: blackFontStyle3,
                         textAlign: TextAlign.right,
                       ),
@@ -275,7 +275,7 @@ class _PaymentPageState extends State<PaymentPage> {
                       style: greyFontStyle,
                     ),
                     Text(
-                      widget.transaction.user!.phoneNumber,
+                      widget.transaction.user!.phoneNumber!,
                       style: blackFontStyle3,
                       textAlign: TextAlign.right,
                     )
@@ -299,7 +299,7 @@ class _PaymentPageState extends State<PaymentPage> {
                             2 * defaultMargin -
                             80,
                         child: Text(
-                          widget.transaction.user!.address,
+                          widget.transaction.user!.address!,
                           style: blackFontStyle3,
                           textAlign: TextAlign.right,
                         ))
@@ -317,7 +317,7 @@ class _PaymentPageState extends State<PaymentPage> {
                       style: greyFontStyle,
                     ),
                     Text(
-                      widget.transaction.user!.houseNumber,
+                      widget.transaction.user!.houseNumber!,
                       style: blackFontStyle3,
                       textAlign: TextAlign.right,
                     )
@@ -335,7 +335,7 @@ class _PaymentPageState extends State<PaymentPage> {
                       style: greyFontStyle,
                     ),
                     Text(
-                      widget.transaction.user!.city,
+                      widget.transaction.user!.city!,
                       style: blackFontStyle3,
                       textAlign: TextAlign.right,
                     )
