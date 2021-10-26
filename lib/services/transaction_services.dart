@@ -5,7 +5,7 @@ class TransactionServices {
       {http.Client? client}) async {
     client ??= http.Client();
 
-    String url = baseURL + 'transaction';
+    String url = baseURL + 'transaction/?limit=1000';
 
     var response = await client.get(
       Uri.parse(url),

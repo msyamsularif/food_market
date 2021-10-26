@@ -128,7 +128,20 @@ class _ProfilePageState extends State<ProfilePage> {
               height: 80,
             )
           ],
-        )
+        ),
+        Padding(
+          padding: const EdgeInsets.all(defaultMargin),
+          child: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              primary: mainColor,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20),
+              ),
+            ),
+            onPressed: () {},
+            child: Text("Log Out"),
+          ),
+        ),
       ],
     );
   }
