@@ -39,7 +39,7 @@ class Transaction extends Equatable {
         food: Food.fromJson(data['food']),
         quantity: data['quantity'],
         total: data['total'],
-        dateTime: DateTime.fromMicrosecondsSinceEpoch(data['dateTime']),
+        dateTime: DateTime.fromMicrosecondsSinceEpoch(data['created_at']),
         status: (data['status'] == 'PENDING')
             ? TransactionStatus.pending
             : (data['status'] == 'DELIVERED')
