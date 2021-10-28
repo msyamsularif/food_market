@@ -9,6 +9,7 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   int selectedIndex = 0;
+  bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -125,22 +126,61 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
             ),
             SizedBox(
-              height: 80,
+              height: 10,
             )
           ],
         ),
         Padding(
           padding: const EdgeInsets.all(defaultMargin),
-          child: ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              primary: mainColor,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20),
-              ),
-            ),
-            onPressed: () {},
-            child: Text("Log Out"),
-          ),
+          child: isLoading
+              ? loadingIndicator
+              : ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: mainColor,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                  ),
+                  onPressed: () async {
+                    setState(() {
+                      isLoading = true;
+                    });
+                    await context.read<UserCubit>().logOut();
+
+                    UserState state = context.read<UserCubit>().state;
+
+                    if (state is UserInitial) {
+                      Get.offAll(() => SignInPage());
+                    } else {
+                      Get.showSnackbar(
+                        GetBar(
+                          backgroundColor: "D9435E".toColor(),
+                          icon: Icon(
+                            MdiIcons.closeCircleOutline,
+                            color: Colors.white,
+                          ),
+                          titleText: Text(
+                            "Log Out Failed",
+                            style: GoogleFonts.poppins(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          messageText: Text(
+                            (state as UserLoadingFailed).message,
+                            style: GoogleFonts.poppins(
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      );
+                      setState(() {
+                        isLoading = false;
+                      });
+                    }
+                  },
+                  child: Text("Log Out"),
+                ),
         ),
       ],
     );

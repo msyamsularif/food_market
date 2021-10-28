@@ -36,11 +36,24 @@ class UserCubit extends Cubit<UserState> {
         await UserService.uploadProfilePicture(pictureFile!);
 
     if (result.value != null) {
-      emit(UserLoaded(
+      emit(
+        UserLoaded(
           user: (state as UserLoaded).user.copyWith(
               picturePath:
                   "http://foodmarket-backend.buildwithangga.id/storage/" +
-                      result.value!)));
+                      result.value!),
+        ),
+      );
+    }
+  }
+
+  Future<void> logOut() async {
+    ApiReturnValue<bool> result = await UserService.logOut();
+
+    if (result.value != null) {
+      emit(UserInitial());
+    } else {
+      emit(UserLoadingFailed(message: result.message!));
     }
   }
 }
