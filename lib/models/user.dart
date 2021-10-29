@@ -66,6 +66,19 @@ class User extends Equatable {
         city: data['city'],
         picturePath: data['profile_photo_url'],
       );
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'name': name,
+      'email': email,
+      'address': address,
+      'houseNumber': houseNumber,
+      'phoneNumber': phoneNumber,
+      'city': city,
+      'profile_photo_url': picturePath,
+    };
+  }
 }
 
 User mockUser = User(

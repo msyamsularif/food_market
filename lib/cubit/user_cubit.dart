@@ -1,13 +1,15 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:food_market/models/models.dart';
 import 'package:food_market/services/services.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
 
 part 'user_state.dart';
 
-class UserCubit extends Cubit<UserState> {
+class UserCubit extends HydratedCubit<UserState> {
   UserCubit() : super(UserInitial());
 
   Future<void> signIn(String email, String password) async {
@@ -55,5 +57,26 @@ class UserCubit extends Cubit<UserState> {
     } else {
       emit(UserLoadingFailed(message: result.message!));
     }
+  }
+
+  @override
+  UserState? fromJson(Map<String, dynamic> json) {
+    User.token = json['access_token'];
+    if (User.token != null) {
+      User user = User.fromJson(json['user']);
+      return UserLoaded(user: user);
+    }
+    return UserInitial();
+  }
+
+  @override
+  Map<String, dynamic>? toJson(UserState state) {
+    if (state is UserLoaded) {
+      return <String, dynamic>{
+        'user': state.user.toJson(),
+        'access_token': User.token
+      };
+    }
+    return <String, dynamic>{'user': null, 'access_token': null};
   }
 }

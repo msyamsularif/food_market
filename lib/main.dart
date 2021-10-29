@@ -2,10 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:food_market/cubit/cubit.dart';
 import 'package:get/get.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
+import 'package:path_provider/path_provider.dart';
 
 import 'ui/pages/pages.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  HydratedBloc.storage = await HydratedStorage.build(
+    storageDirectory: await getTemporaryDirectory(),
+  );
   runApp(MyApp());
 }
 
@@ -22,7 +28,16 @@ class MyApp extends StatelessWidget {
       ],
       child: GetMaterialApp(
         debugShowCheckedModeBanner: false,
-        home: SignInPage(),
+        home: BlocBuilder<UserCubit, UserState>(
+          builder: (context, state) {
+            if (state is UserLoaded) {
+              context.read<FoodCubit>().getFoods();
+              context.read<TransactionCubit>().getTransaction();
+              return MainPage();
+            }
+            return SignInPage();
+          },
+        ),
       ),
     );
   }
